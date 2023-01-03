@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Adventure_Character/Scenes/Demo.unity
+- path: Assets/TheTalesFactory/Photoscanned MoutainsRocks PBR/DemoScene/DemoScene02.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
