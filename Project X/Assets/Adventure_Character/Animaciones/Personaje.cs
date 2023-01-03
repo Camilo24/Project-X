@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class Personaje : MonoBehaviour
 {
-    public bool frente = false;
     Animator animator;
     int frenteParam;
-    // Start is called before the first frame update
+    int atrasParam;
+    float speed = 3.0f; // Velocidad de movimiento del personaje
+
     void Start()
     {
         animator = GetComponent<Animator>();
         frenteParam = Animator.StringToHash("Frente");
+        atrasParam = Animator.StringToHash("Atras");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        // Mueve al personaje hacia delante mientras la animación de caminar esté activa
+        if (Input.GetKey(KeyCode.W))
         {
-            frente = true;
+            animator.SetBool(frenteParam, true);
+            transform.position += transform.forward * speed * Time.deltaTime;
         }
-        animator.SetBool(frenteParam, frente);
+        else
+        {
+            animator.SetBool(frenteParam, false);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool(atrasParam, true);
+            transform.position -= transform.forward * speed * Time.deltaTime;
+        }
+        else
+        {
+            animator.SetBool(atrasParam, false);
+        }
     }
 }
