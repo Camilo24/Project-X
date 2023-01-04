@@ -43,17 +43,12 @@ public class Personaje : MonoBehaviour
             animator.SetBool(atrasParam, false);
         }
 
-        // Rotar al personaje hacia la derecha mientras la animación de caminar esté activa
-        if (Input.GetKey(KeyCode.W))
-        {
-            angle += speedr * Time.deltaTime;
-            transform.rotation = Quaternion.Euler(0, angle, 0);
-        }
-
         if(Input.GetKey(KeyCode.D))
         {
             animator.SetBool(derechaParam, true);
             transform.Rotate(0, speedr * Time.deltaTime, 0);
+            angle += speedr * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, angle, 0);
         }
         else
         {
