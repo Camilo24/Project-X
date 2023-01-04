@@ -7,18 +7,22 @@ public class Personaje : MonoBehaviour
     Animator animator;
     int frenteParam;
     int atrasParam;
-    float speed = 3.0f; // Velocidad de movimiento del personaje
+    int derechaParam;
+    float speed = 3.0f;
+    float speedr = 90.0f; // Velocidad de rotación del personaje (en grados por segundo)
+    float angle; // Ángulo de rotación actual
 
     void Start()
     {
         animator = GetComponent<Animator>();
         frenteParam = Animator.StringToHash("Frente");
         atrasParam = Animator.StringToHash("Atras");
+        derechaParam = Animator.StringToHash("Derecha");
+        angle = 0;
     }
 
     void Update()
     {
-        // Mueve al personaje hacia delante mientras la animación de caminar esté activa
         if (Input.GetKey(KeyCode.W))
         {
             animator.SetBool(frenteParam, true);
@@ -37,6 +41,23 @@ public class Personaje : MonoBehaviour
         else
         {
             animator.SetBool(atrasParam, false);
+        }
+
+        // Rotar al personaje hacia la derecha mientras la animación de caminar esté activa
+        if (Input.GetKey(KeyCode.W))
+        {
+            angle += speedr * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+        }
+
+        if(Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool(derechaParam, true);
+            transform.Rotate(0, speedr * Time.deltaTime, 0);
+        }
+        else
+        {
+            animator.SetBool(derechaParam, false);
         }
     }
 }
